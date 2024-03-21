@@ -5,23 +5,23 @@ jobs:
     docker:
       - image: cimg/go:1.21.8  # Using a CircleCI maintained Go image
 
-    working_directory: ~/circleci-playground  # Assuming the project directory is mapped to this path
+    working_directory: ~/circleci-playground  # Set the working directory
 
     steps:
-      - checkout
+      - checkout # checks out the source code of the project into the working directory
 
       # Run Go tests
       - run:
           name: Run Go tests
-          command: go test ./...  # Include coverage for better feedback (optional)
+          command: go test -cover ./...  
 
       # Use setup_remote_docker to set up a remote Docker environment
       - setup_remote_docker
 
-      # Build Docker image (assuming Dockerfile is in the project root)
+      # Build Docker image (Make sure Dockerfile is in the root folder of the project)
       - run:
           name: Build Docker image
-          command: docker build -t breeze5690/hello-world:latest .
+          command: docker build -t breeze5690/hello-world:latest . 
 
       # Login to Docker Hub using environment variables
       - run:
