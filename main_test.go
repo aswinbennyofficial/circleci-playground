@@ -30,7 +30,7 @@ func TestHandler(t *testing.T) {
     }
 
     // Check the response body
-    expected := "Hello World, The secret env is test_secret_key"
+    expected := "Hello World, The secret env is test_secret_key!"
     if rr.Body.String() != expected {
         t.Errorf("handler returned unexpected body: got %v want %v",
             rr.Body.String(), expected)
