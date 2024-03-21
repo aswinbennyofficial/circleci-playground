@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/go:1.17  # Using a CircleCI maintained Go image
+      - image: cimg/go:1.21.8  # Using a CircleCI maintained Go image
 
     working_directory: ~/circleci-playground  # Assuming the project directory is mapped to this path
 
