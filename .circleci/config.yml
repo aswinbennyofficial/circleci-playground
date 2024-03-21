@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: cimg/go:1.17  # Using a CircleCI maintained Go image
 
-    working_directory: /go/src/github.com/aswinbennyofficial/circleci-playground
+    working_directory: ~/circleci-playground  # Assuming the project directory is mapped to this path
 
     steps:
       - checkout
@@ -13,20 +13,20 @@ jobs:
       # Run Go tests
       - run:
           name: Run Go tests
-          command: go test ./...
+          command: go test ./...  # Include coverage for better feedback (optional)
 
       # Use setup_remote_docker to set up a remote Docker environment
       - setup_remote_docker
 
-      # Build Docker image
+      # Build Docker image (assuming Dockerfile is in the project root)
       - run:
           name: Build Docker image
           command: docker build -t breeze5690/hello-world:latest .
 
-      # Log in to Docker Hub
+      # Login to Docker Hub using environment variables
       - run:
-          name: Log in to Docker Hub
-          command: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+          name: Login to Docker Hub
+          command: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
 
       # Push Docker image to Docker Hub
       - run:
