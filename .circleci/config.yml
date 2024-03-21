@@ -3,27 +3,20 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: docker:19.03.12
+      - image: cimg/go:1.17  # Using a CircleCI maintained Go image
 
     working_directory: /go/src/github.com/aswinbennyofficial/circleci-playground
 
     steps:
       - checkout
 
-      # Install Go (if needed)
-      - run:
-          name: Install Go
-          command: apk add --no-cache go
-
       # Run Go tests
       - run:
           name: Run Go tests
           command: go test ./...
 
-      # Install Docker client
-      - run:
-          name: Install Docker client
-          command: apk add --no-cache docker
+      # Use setup_remote_docker to set up a remote Docker environment
+      - setup_remote_docker
 
       # Build Docker image
       - run:
